@@ -15,14 +15,24 @@ import java.util.List;
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int article_id;
+    @Column(name = "article_id")
+    private int articleId;
+    @Column(name = "title")
     private String title;
     @Lob
+    @Column(name = "content")
     private String content;
-    private int author_id;
-    private Date create_date;
-    private Date update_date;
-    private int category_id;
+    @Column(name = "author_id")
+    private int authorId;
+    @Column(name = "create_date")
+    private Date createDate;
+    @Column(name = "update_date")
+    private Date updateDate;
+    @Column(name = "category_id")
+    private int categoryId;
+    @Column(name = "status")
     private int status;
-    private int view_count;
+    @Column(name = "view_count")
+    private int viewCount;
+
 }

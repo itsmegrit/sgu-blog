@@ -8,6 +8,16 @@ body {
   background: #f1f1f1;
 }
 
+#container {
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#article-container {
+  min-height: 100vh;
+}
+
 /* Create two unequal columns that floats next to each other */
 /* Left column */
 .leftcolumn {

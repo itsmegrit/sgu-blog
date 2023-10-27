@@ -23,7 +23,8 @@ public class ArticleController {
 
     @GetMapping(value = "")
     public String listArticles(Model model, @RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "4") int size) {
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Sort sort = Sort.by(Sort.Direction.DESC, "articleId");
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
         Page<ArticleDTO> articles = articleService.findAllArticles(pageable);
         model.addAttribute("articles", articles);
         return "home/homePage";
@@ -38,12 +39,30 @@ public class ArticleController {
     @GetMapping("/create")
     public String createArticle(Model model) {
         model.addAttribute("article", new Article());
-        return "article/create";
+        return "admin/createArticle";
     }
 
     @PostMapping("/create")
     public String createArticle(@ModelAttribute Article article) {
         articleService.save(article);
         return "redirect:/article/" + article.getArticleId();
+    }
+
+    @GetMapping("/{id}/edit")
+    public String updateArticle(@PathVariable int id, Model model){
+        model.addAttribute("article", articleService.findById(id));
+        return "admin/editArticle";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateArticle(@PathVariable int id, @ModelAttribute Article article){
+        articleService.update(article);
+        return "redirect:/article/" + article.getArticleId();
+    }
+
+    @PostMapping(value = "/{id}/delete")
+    public String deleteArticle(@PathVariable int id){
+        articleService.delete(id);
+        return "redirect:/admin/article";
     }
 }

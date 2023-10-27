@@ -1,11 +1,5 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial;
-  padding: 20px;
-  background: #f1f1f1;
+#blog-content {
+  max-width: 1200px;
 }
 
 /* Create two unequal columns that floats next to each other */
@@ -25,22 +19,48 @@ body {
 /* Fake image */
 .fakeimg {
   background-color: #999;
-  width: 100%;
+  width: 50%;
   padding: 20px;
 }
 
 /* Add a card effect for articles */
 .card {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: white;
   padding: 20px;
   margin-top: 20px;
 }
+
+.article {
+  display: flex;
+}
+
+.article-infor {
+  max-width: 50%;
+  margin-left: 12px;
+}
+
+.article-infor h2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 /* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
+}
+
+.content-preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */

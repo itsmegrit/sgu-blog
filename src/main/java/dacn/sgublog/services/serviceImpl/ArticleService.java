@@ -44,11 +44,6 @@ public class ArticleService implements IArticleService {
             dto.setTitle(article.getTitle());
             dto.setContent(article.getContent());
             dto.setAuthorName(userService.findUserById(article.getAuthorId()).get().getFirstName());
-//            Optional<Category> optionalCategory = categoryRepository.findById(article.getCategoryId());
-//            if (optionalCategory.isPresent()) {
-//                Category category = optionalCategory.get();
-//                dto.setCategoryName(category.getCategoryName());
-//            }
             dto.setCreateDate(article.getCreateDate());
             dto.setViewCount(article.getViewCount());
             return dto;
@@ -67,16 +62,14 @@ public class ArticleService implements IArticleService {
 
         ArticleDTO dto = new ArticleDTO();
         dto.setArticleId(article.get().getArticleId());
+        dto.setAuthorId(article.get().getAuthorId());
         dto.setTitle(article.get().getTitle());
         dto.setContent(article.get().getContent());
         dto.setAuthorName(userService.findUserById(article.get().getAuthorId()).get().getFirstName());
-//            Optional<Category> optionalCategory = categoryRepository.findById(article.getCategoryId());
-//            if (optionalCategory.isPresent()) {
-//                Category category = optionalCategory.get();
-//                dto.setCategoryName(category.getCategoryName());
-//            }
         dto.setCreateDate(article.get().getCreateDate());
         dto.setViewCount(article.get().getViewCount());
+        dto.setUpdateDate(article.get().getUpdateDate());
+        dto.setStatus(article.get().getStatus());
         return dto;
     }
 
@@ -85,6 +78,22 @@ public class ArticleService implements IArticleService {
         Date currentDate = new Date();
         article.setCreateDate(currentDate);
         articleRepository.save(article);
+        return true;
+    }
+
+    @Override
+    public boolean update(Article article) {
+        Date currentDate = new Date();
+        article.setUpdateDate(currentDate);
+        Optional<Article> articleEntity = articleRepository.findById(article.getArticleId());
+        article.setCreateDate(articleEntity.get().getCreateDate());
+        articleRepository.save(article);
+        return true;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        articleRepository.deleteById(id);
         return true;
     }
 }

@@ -4,58 +4,61 @@
     <meta charset="UTF-8" />
     <title>SGU BLOG</title>
     <link th:href="@{/styles/homePage.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/styles/common.css}" />
     <link rel="stylesheet" th:href="@{/styles/footer.css}" />
     <link rel="stylesheet" th:href="@{/styles/header.css}" />
     <link rel="stylesheet" th:href="@{/styles/pagination.css}" />
   </head>
   <body>
-    <div th:replace="~{fragments/header :: header}"></div>
+    <div id="container">
+      <div id="blog-content">
+        <div th:replace="~{fragments/header :: header}"></div>
+        <div class="row">
+          <div class="leftcolumn">
+            <!-- blogs -->
+            <div class="card" th:each="article : ${articles}">
+              <a class="article" th:href="@{'/article/' + ${article.articleId}}">
+                <div class="fakeimg" style="height: 200px"></div>
+                <div class="article-infor">
+                  <h2>
+                    <span th:text="${article.title}"></span>
+                  </h2>
+                  <h5>
+                    Tác giả:
+                    <span th:text="${article.authorName}"></span>
+                    - Ngày đăng:
+                    <span th:text="${#dates.format(article.createDate, 'dd MMMM, yyyy')}"></span>
+                  </h5>
+                  <p class="content-preview" th:text="${article.content}"></p>
+                </div>
+              </a>
+            </div>
+            <div th:replace="~{home/pagination :: pagination}"></div>
+          </div>
 
-    <div class="row">
-      <div class="leftcolumn">
-        <!-- blogs -->
-        <div class="card" th:each="article : ${articles}">
-          <a th:href="@{'/article/' + ${article.articleId}}">
-            <h2>
-              <span th:text="${article.title}"></span>
-            </h2>
-            <h5>
-              Tác giả:
-              <span th:text="${article.authorName}"></span>
-              - Ngày đăng:
-              <span th:text="${#dates.format(article.createDate, 'dd MMMM, yyyy')}"></span>
-            </h5>
-
-            <div class="fakeimg" style="height: 200px"></div>
-            <p th:text="${article.content}"></p>
-          </a>
+          <div class="rightcolumn">
+            <div class="card">
+              <h2>About Me</h2>
+              <div class="fakeimg" style="height: 100px">Image</div>
+              <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+            </div>
+            <div class="card">
+              <h3>Popular Post</h3>
+              <div class="fakeimg">Image</div>
+              <br />
+              <div class="fakeimg">Image</div>
+              <br />
+              <div class="fakeimg">Image</div>
+            </div>
+            <div class="card">
+              <h3>Follow Me</h3>
+              <p>Some text..</p>
+            </div>
+          </div>
         </div>
-        <div th:replace="~{home/pagination :: pagination}"></div>
-      </div>
-
-      <div class="rightcolumn">
-        <div class="card">
-          <h2>About Me</h2>
-          <div class="fakeimg" style="height: 100px">Image</div>
-          <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-        </div>
-        <div class="card">
-          <h3>Popular Post</h3>
-          <div class="fakeimg">Image</div>
-          <br />
-          <div class="fakeimg">Image</div>
-          <br />
-          <div class="fakeimg">Image</div>
-        </div>
-        <div class="card">
-          <h3>Follow Me</h3>
-          <p>Some text..</p>
-        </div>
+        <div th:replace="~{fragments/footer :: footer}"></div>
       </div>
     </div>
-
-    <div th:replace="~{fragments/footer :: footer}"></div>
-
     <script type="text/javascript" th:src="@{/js/pagination.js}"></script>
     <script type="text/javascript" th:src="@{/js/test.js}"></script>
   </body>

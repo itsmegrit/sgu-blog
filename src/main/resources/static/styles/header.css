@@ -20,22 +20,28 @@
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
   font-size: 17px;
+  float: left; /* Sắp xếp các mục menu theo chiều ngang */
+  display: block; /* Chuyển các mục menu thành khối */
+  color: white; /* Màu chữ */
+  text-align: center; /* Căn giữa nội dung của mục menu */
+  padding: 14px 16px; /* Khoảng cách giữa các mục menu */
+  text-decoration: none; /* Loại bỏ gạch chân trên liên kết */
+  transition: background-color 0.3s; /* Hiệu ứng màu nền chuyển đổi */
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #555;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #04aa6d;
+  background-color: #4caf50; /* Màu nền của mục menu được chọn */
   color: white;
+}
+
+#blog-logo {
+  max-width: 120px;
+  height: auto;
 }

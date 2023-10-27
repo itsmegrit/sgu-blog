@@ -8,4 +8,5 @@ import java.util.Optional;
 @Service
 public interface IUserService {
     public Optional<User> findUserById(int id);
+
 }

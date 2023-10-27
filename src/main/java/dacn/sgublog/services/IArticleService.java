@@ -14,4 +14,7 @@ public interface IArticleService {
    public Page<ArticleDTO> findAllArticles(Pageable pageable);
    public ArticleDTO findById(int id);
    public boolean save(Article article);
+
+   public boolean update(Article article);
+   public boolean delete(int id);
 }

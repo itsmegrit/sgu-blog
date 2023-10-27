@@ -25,7 +25,8 @@ public class HomePageController {
 
     @GetMapping(value = "")
     public String homePage(Model model, @RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "4") int size) {
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Sort sort = Sort.by(Sort.Direction.DESC, "articleId");
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
         Page<ArticleDTO> articles = IArticleService.findAllArticles(pageable);
         model.addAttribute("articles", articles);
         return "home/homePage";

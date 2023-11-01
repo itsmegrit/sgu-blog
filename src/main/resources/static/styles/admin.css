@@ -16,8 +16,12 @@
   left: 0;
   background-color: #f8f8f8;
   color: #fff;
-  /padding: 20px;
+  padding: 20px;
   flex-direction: column;
+}
+
+#sidebar img {
+  max-width: 120px;
 }
 
 #header {

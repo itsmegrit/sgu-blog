@@ -1,14 +1,16 @@
 <div th:fragment="innerDashboardContent">
   <div id="inner-dashboard-content">
     <a th:if="${articles != null}" href="/article/create">
-      <button id="btnThemMoiBaiViet">Thêm mới bài viết</button>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="btnThemMoiBaiViet">Thêm mới bài viết</button>
     </a>
 
     <table th:if="${articles != null}">
       <tr th:each="article : ${articles}">
         <td th:text="${article.articleId}"></td>
         <td th:text="${article.title}"></td>
-        <td><a th:href="@{/article/{id}/edit(id=${article.articleId})}">Chỉnh sửa</a></td>
+        <td>
+          <a th:href="@{/article/edit/{id}(id=${article.articleId})}"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Chỉnh sửa</button></a>
+        </td>
       </tr>
     </table>
   </div>

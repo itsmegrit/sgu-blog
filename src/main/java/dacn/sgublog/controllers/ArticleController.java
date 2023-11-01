@@ -1,5 +1,7 @@
 package dacn.sgublog.controllers;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import dacn.sgublog.DTOs.ArticleDTO;
 import dacn.sgublog.entities.Article;
 import dacn.sgublog.services.IArticleService;
@@ -12,8 +14,11 @@ import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(path = "article")
@@ -21,7 +26,8 @@ public class ArticleController {
     @Autowired
     private IArticleService articleService;
 
-    @GetMapping(value = "")
+
+    @GetMapping(value = "/view")
     public String listArticles(Model model, @RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "4") int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "articleId");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
@@ -30,8 +36,8 @@ public class ArticleController {
         return "home/homePage";
     }
 
-    @GetMapping(value = "/{id}")
-    public String viewArticle(Model model, @PathVariable int id){
+    @GetMapping(value = "/view/{id}")
+    public String viewArticle(Model model, @PathVariable int id) throws Exception {
         model.addAttribute("article", articleService.findById(id));
         return "home/article";
     }
@@ -43,24 +49,24 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public String createArticle(@ModelAttribute Article article) {
-        articleService.save(article);
-        return "redirect:/article/" + article.getArticleId();
+    public String createArticle(@ModelAttribute Article article, @RequestParam("file") MultipartFile file) throws IOException {
+        articleService.save(article, file);
+        return "redirect:/article/view/" + article.getArticleId();
     }
 
-    @GetMapping("/{id}/edit")
-    public String updateArticle(@PathVariable int id, Model model){
+    @GetMapping("/edit/{id}")
+    public String updateArticle(@PathVariable int id, Model model) throws Exception {
         model.addAttribute("article", articleService.findById(id));
         return "admin/editArticle";
     }
 
-    @PostMapping("/{id}/edit")
+    @PostMapping("/edit/{id}")
     public String updateArticle(@PathVariable int id, @ModelAttribute Article article){
         articleService.update(article);
-        return "redirect:/article/" + article.getArticleId();
+        return "redirect:/article/view/" + article.getArticleId();
     }
 
-    @PostMapping(value = "/{id}/delete")
+    @PostMapping(value = "/delete/{id}")
     public String deleteArticle(@PathVariable int id){
         articleService.delete(id);
         return "redirect:/admin/article";

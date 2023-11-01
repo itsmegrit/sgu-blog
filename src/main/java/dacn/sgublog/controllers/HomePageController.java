@@ -23,7 +23,7 @@ public class HomePageController {
     @Autowired
     private IArticleService IArticleService;
 
-    @GetMapping(value = "")
+    @GetMapping(value = {"home", "/"})
     public String homePage(Model model, @RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "4") int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "articleId");
         Pageable pageable = PageRequest.of(page - 1, size, sort);

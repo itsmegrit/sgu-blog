@@ -19,6 +19,7 @@ public class ArticleDTO{
     private Date updateDate;
     private int viewCount;
     private int status;
+    private String imgUrl;
 
     public boolean hasPrevious(){
         return page>0;

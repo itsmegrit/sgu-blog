@@ -1,5 +1,6 @@
 package dacn.sgublog.services.serviceImpl;
 
+import com.cloudinary.api.ApiResponse;
 import dacn.sgublog.DTOs.ArticleDTO;
 import dacn.sgublog.entities.Article;
 import dacn.sgublog.entities.Category;
@@ -8,12 +9,15 @@ import dacn.sgublog.repositories.ArticleRepository;
 import dacn.sgublog.repositories.CategoryRepository;
 import dacn.sgublog.repositories.UserRepository;
 import dacn.sgublog.services.IArticleService;
+import dacn.sgublog.services.IImageService;
 import dacn.sgublog.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +29,8 @@ public class ArticleService implements IArticleService {
     private ArticleRepository articleRepository;
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IImageService imageService;
 
     @Override
     public List<Article> findAllArticles() {
@@ -53,7 +59,7 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public ArticleDTO findById(int id) {
+    public ArticleDTO findById(int id) throws Exception {
         Optional<Article> article = articleRepository.findById(id);
 
         Article articleEntity =  article.get();
@@ -70,14 +76,23 @@ public class ArticleService implements IArticleService {
         dto.setViewCount(article.get().getViewCount());
         dto.setUpdateDate(article.get().getUpdateDate());
         dto.setStatus(article.get().getStatus());
+
+        String imgUrl = imageService.getFile("210002.jpeg").get("url").toString();
+
+        dto.setImgUrl(imgUrl);
         return dto;
     }
 
     @Override
-    public boolean save(Article article) {
+    public boolean save(Article article, MultipartFile file) throws IOException {
         Date currentDate = new Date();
         article.setCreateDate(currentDate);
+
+        String originalFileName = file.getOriginalFilename();
+        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
         articleRepository.save(article);
+        String fileName = article.getArticleId() + extension;
+        imageService.upload(file, fileName);
         return true;
     }
 

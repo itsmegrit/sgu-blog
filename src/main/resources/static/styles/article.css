@@ -18,20 +18,6 @@ body {
   min-height: 100vh;
 }
 
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {
-  float: left;
-  width: 75%;
-}
-
-/* Right column */
-.rightcolumn {
-  float: left;
-  width: 25%;
-  padding-left: 20px;
-}
-
 /* Fake image */
 .fakeimg {
   background-color: #999;

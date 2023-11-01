@@ -5,27 +5,3 @@
   align-items: center;
   margin: auto;
 }
-
-.pagination {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-}
-
-.page-link {
-  border-radius: 5px;
-  padding: 8px 16px;
-  text-decoration: none;
-  color: chocolate;
-  background-color: beige;
-}
-
-.pagination li a {
-  padding: 10px;
-  text-decoration: none;
-}
-
-.page-link.active {
-  border-radius: 5px;
-  background-color: aqua;
-}

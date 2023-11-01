@@ -9,7 +9,7 @@
   <body>
     <div id="container">
       <h1 th:if="${article != null}">Chỉnh sửa bài viết</h1>
-      <form th:if="${article != null}" th:action="@{/article/{id}/edit(id=${article.articleId})}" th:object="${article}" method="POST">
+      <form th:if="${article != null}" th:action="@{/article/edit/{id}(id=${article.articleId})}" th:object="${article}" method="POST">
         <input type="hidden" th:field="*{articleId}" />
         <input type="hidden" th:field="*{authorId}" />
         <input type="hidden" th:field="*{status}" />
@@ -22,7 +22,7 @@
         <button type="submit">Cập nhật</button>
       </form>
 
-      <form th:action="@{/article/{id}/delete(id=${article.articleId})}" method="POST">
+      <form th:action="@{/article/delete/{id}(id=${article.articleId})}" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <button type="submit">Xóa bài viết</button>
       </form>

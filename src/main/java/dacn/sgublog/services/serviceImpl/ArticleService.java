@@ -41,7 +41,6 @@ public class ArticleService implements IArticleService {
     @Override
     public Page<ArticleDTO> findAllArticles(Pageable pageable) {
         Page<Article> articles = articleRepository.findAll(pageable);
-        int totalPages;
 
         // Chuyển từ Entity Article sang DTO ArticleDTO
         Page<ArticleDTO> articleDTOPage = articles.map(article -> {
@@ -54,7 +53,6 @@ public class ArticleService implements IArticleService {
             dto.setViewCount(article.getViewCount());
             return dto;
         });
-
         return articleDTOPage;
     }
 

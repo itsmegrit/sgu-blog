@@ -5,31 +5,19 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" th:href="@{/styles/admin.css}" />
     <link rel="stylesheet" th:href="@{/styles/common.css}" />
-
     <link rel="stylesheet" th:href="@{/styles/header.css}" />
     <link rel="stylesheet" th:href="@{/styles/listArticle.css}" />
-    <link rel="stylesheet" th:href="@{/style/inner-dashboard-content.css}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div id="container">
-      <div id="dashboard-container">
-        <div id="sidebar">
-          <a href="/">
-            <img id="blog-logo" th:src="@{/images/logo.png}" alt="LOGO" />
-          </a>
-          <a href="/admin">
-            <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Dashboard</button>
-          </a>
-          <a href="/admin/document"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Docs</button></a>
-          <a href="/admin/article"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Article</button></a>
-          <a href="/admin/user"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">User</button></a>
-          <a href="/admin/setting"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Setting</button></a>
-          <a href="/admin/logout"><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Logout</button></a>
-        </div>
-        <div id="dashboard-content">
-          <div id="header">Dashboar header</div>
+    <div th:replace="~{admin/nav :: topnav}">
+    </div>
+    <div th:replace="~{admin/aside :: aside}"></div>
+    <div class="p-4 sm:ml-64">
+      <div class="border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <div class="grid gap-4 mb-4">
           <div th:replace="~{admin/innerDashboardContent :: innerDashboardContent}"></div>
         </div>
       </div>

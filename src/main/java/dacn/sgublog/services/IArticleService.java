@@ -16,7 +16,6 @@ public interface IArticleService {
    public Page<ArticleDTO> findAllArticles(Pageable pageable);
    public ArticleDTO findById(int id) throws Exception;
    public boolean save(Article article, MultipartFile file) throws IOException;
-
    public boolean update(Article article);
    public boolean delete(int id);
 }

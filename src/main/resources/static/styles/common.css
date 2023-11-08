@@ -9,6 +9,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background: #f1f1f1;
 }
 
 ul,
@@ -24,4 +25,5 @@ a {
   max-width: 1200px;
   margin: 0 auto;
   background-color: #f8f8f8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

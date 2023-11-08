@@ -13,8 +13,8 @@ public class ArticleDTO{
     private int authorId;
     private String title;
     private String content;
-    private String authorName; // Thêm thuộc tính để lưu tên tác giả
-    private String categoryName; // Thêm thuộc tính để lưu tên danh mục
+    private String authorName;
+    private String categoryName;
     private Date createDate;
     private Date updateDate;
     private int viewCount;

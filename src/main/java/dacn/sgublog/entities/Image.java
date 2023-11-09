@@ -10,8 +10,8 @@ import java.util.Date;
 @Data
 public class Image {
     @Id
-    private int imageID;
+    private int imageId;
     private String url;
-    private int articleID;
+    private int articleId;
     private Date uploadedDate;
 }

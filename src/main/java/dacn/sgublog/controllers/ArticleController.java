@@ -5,6 +5,7 @@ import com.cloudinary.utils.ObjectUtils;
 import dacn.sgublog.DTOs.ArticleDTO;
 import dacn.sgublog.entities.Article;
 import dacn.sgublog.services.IArticleService;
+import dacn.sgublog.services.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,8 @@ import java.util.Map;
 public class ArticleController {
     @Autowired
     private IArticleService articleService;
+    @Autowired
+    private ICategoryService categoryService;
 
 
     @GetMapping(value = "/view")
@@ -44,6 +47,7 @@ public class ArticleController {
 
     @GetMapping("/create")
     public String createArticle(Model model) {
+        model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("article", new Article());
         return "admin/createArticle";
     }

@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 public class FeedBack {
     @Id
-    private int feedBackID;
+    private int feedBackId;
     private String title;
     private Date createDate;
     private String content;

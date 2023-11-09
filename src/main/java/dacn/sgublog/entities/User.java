@@ -11,7 +11,7 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
-    @Column(name = "user_name")
+    @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
@@ -25,8 +25,8 @@ public class User {
     private String phone;
     @Column(name = "address")
     private String address;
-    @Column(name = "roles")
-    private int roles;
+    @Column(name = "role")
+    private int role;
     @Column(name = "is_active")
     private int isActive;
 }

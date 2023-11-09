@@ -85,7 +85,6 @@ public class ArticleService implements IArticleService {
     public boolean save(Article article, MultipartFile file) throws IOException {
         Date currentDate = new Date();
         article.setCreateDate(currentDate);
-
         String originalFileName = file.getOriginalFilename();
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
         articleRepository.save(article);

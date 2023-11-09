@@ -38,7 +38,7 @@ public class UserService implements IUserService {
             dto.setUserId(user.getUserId());
             dto.setUsername(user.getUsername());
             dto.setFirstName(user.getFirstName());
-            dto.setRoles(user.getRoles());
+            dto.setRole(user.getRole());
             dto.setPhone(user.getPhone());
             return dto;
         });

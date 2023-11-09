@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class Collections {
     @Id
-    private int userID;
+    private int userId;
     private List<Integer> historyListID;
     private List<Integer> favoriteListID;
 }

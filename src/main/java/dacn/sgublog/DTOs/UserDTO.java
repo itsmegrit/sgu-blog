@@ -17,7 +17,7 @@ public class UserDTO {
     private String email;
     private String phone;
     private String address;
-    private int roles;
+    private int role;
     private int isActive;
 
     public boolean hasPrevious(){

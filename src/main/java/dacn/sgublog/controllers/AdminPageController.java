@@ -5,12 +5,16 @@ import dacn.sgublog.DTOs.UserDTO;
 import dacn.sgublog.entities.Article;
 import dacn.sgublog.entities.User;
 import dacn.sgublog.services.IArticleService;
+import dacn.sgublog.services.IAuthenticationService;
 import dacn.sgublog.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +28,23 @@ public class AdminPageController {
     private IArticleService articleService;
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IAuthenticationService authenticationService;
+
     @GetMapping(value = "")
-    public String adminPage(){
-        return  "admin/adminPage";
+    public String adminPage(Model model){
+        Object principal = authenticationService.getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            model.addAttribute("username", ((UserDetails) principal).getUsername());
+        } else {
+            model.addAttribute("username", "");
+        }
+        String name = authenticationService.getAuthentication().getName();
+        model.addAttribute("name", name);
+        return "admin/adminPage";
     }
+
+
 
     @GetMapping(value = "/article")
     public String blogCrud(Model model, @RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "5") int size){

@@ -2,6 +2,7 @@ package dacn.sgublog.services;
 
 import dacn.sgublog.DTOs.RegistrationRequest;
 import dacn.sgublog.DTOs.UserDTO;
+import dacn.sgublog.Exception.UsernameAlreadyExistsException;
 import dacn.sgublog.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,7 @@ import java.util.Optional;
 public interface IUserService{
     public Optional<User> findUserById(int id);
     public Iterable<User> findAll();
-    public User registerUser(RegistrationRequest registrationRequest);
+    public User registerUser(RegistrationRequest registrationRequest) throws UsernameAlreadyExistsException;;
     public User findByUsername(String username);
     public Page<UserDTO> findAll(Pageable pageable);
 }

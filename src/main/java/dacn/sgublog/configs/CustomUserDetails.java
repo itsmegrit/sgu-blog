@@ -16,18 +16,19 @@ public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;
     private int isActive;
+    private int userId;
     private List<GrantedAuthority> authorities;
 
     public CustomUserDetails(User user) {
+        this.userId = user.getUserId();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.isActive = user.getIsActive();
         this.authorities =
-                Arrays.stream(user.getRoles().toString().split(","))
-                        .map(SimpleGrantedAuthority::new)
+                user.getRoles().stream()
+                        .map((role) -> new SimpleGrantedAuthority(role.getName()))
                         .collect(Collectors.toList());
     }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

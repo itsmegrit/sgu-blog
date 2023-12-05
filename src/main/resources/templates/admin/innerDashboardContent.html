@@ -1,0 +1,73 @@
+<div th:fragment="innerDashboardContent">
+  <div id="inner-dashboard-content">
+    <a th:if="${articles != null}" href="/article/create">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="btnThemMoiBaiViet">Thêm mới bài viết</button>
+    </a>
+    <div th:if="${articles != null}" class="p-4 relative">
+      <div class="h-96">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">ID</th>
+              <th scope="col" class="px-6 py-3">Tiêu đề</th>
+              <th scope="col" class="px-6 py-3">Ngày đăng</th>
+              <th scope="col" class="px-6 py-3">Lượt xem</th>
+              <th scope="col" class="px-6 py-3">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="article : ${articles}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <th th:text="${article.articleId}" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"></th>
+              <td th:text="${article.title}" class="px-6 py-4"></td>
+              <td th:text="${#dates.format(article.createDate, 'dd MMMM, yyyy')}" class="px-6 py-4"></td>
+              <td th:text="${article.viewCount}" class="px-6 py-4"></td>
+              <td class="px-6 py-4">
+                <a th:href="@{/article/edit/{id}(id=${article.articleId})}"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Chỉnh sửa</button></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <nav class="flex items-center justify-between pt-4" aria-label="Table navigation">
+        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+        <div class="" th:replace="~{admin/pagination :: articlePagination}"></div>
+      </nav>
+    </div>
+
+    <div th:if="${users != null}" class="p-4 relative">
+      <div class="h-96">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">ID</th>
+              <th scope="col" class="px-6 py-3">Tên đăng nhập</th>
+              <th scope="col" class="px-6 py-3">Tên người dùng</th>
+              <th scope="col" class="px-6 py-3">Email</th>
+              <th scope="col" class="px-6 py-3">SDT</th>
+              <th scope="col" class="px-6 py-3">Vai trò</th>
+              <th scope="col" class="px-6 py-3">Trang thái</th>
+              <th scope="col" class="px-6 py-3">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="user : ${users}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <th th:text="${user.userId}" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"></th>
+              <td th:text="${user.username}" class="px-6 py-4"></td>
+              <td th:text="${user.firstName}" class="px-6 py-4"></td>
+              <td th:text="${user.email}" class="px-6 py-4"></td>
+              <td th:text="${user.phone}" class="px-6 py-4"></td>
+              <td th:text="${user.role}" class="px-6 py-4"></td>
+              <td th:text="${user.isActive}" class="px-6 py-4"></td>
+              <td class="px-6 py-4">
+                <a th:href="@{/user/edit/{id}(id=${user.userId})}"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Chỉnh sửa</button></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <nav class="flex items-center justify-between pt-4" aria-label="Table navigation">
+         <div class="" th:replace="~{admin/pagination :: userPagination}"></div>
+      </nav>
+    </div>
+  </div>
+</div>

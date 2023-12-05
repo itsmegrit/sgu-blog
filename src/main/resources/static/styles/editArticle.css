@@ -1,0 +1,61 @@
+/* Form styling */
+form {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+}
+
+form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+form button:hover {
+  background-color: #0069d9;
+}
+
+/* Fake image styling */
+.fakeimg {
+  background-color: #ccc;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 1rem;
+}
+
+/* Textarea styling */
+textarea {
+  height: 200px;
+  resize: none;
+}
+
+/* Delete button styling */
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Responsive styling */
+@media (max-width: 576px) {
+  form {
+    width: 100%;
+    flex-direction: column;
+  }
+}

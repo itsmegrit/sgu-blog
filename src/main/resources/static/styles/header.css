@@ -1,0 +1,16 @@
+.header {
+  background-color: #fff;
+}
+
+#blog-logo {
+  width: 120px;
+}
+
+.topnav {
+  margin-left: 40px;
+}
+
+.search-form {
+  margin: auto;
+  display: inline-flex;
+}

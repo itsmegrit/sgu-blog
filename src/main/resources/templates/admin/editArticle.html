@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chỉnh sửa bài viết</title>
+    <link rel="stylesheet" th:href="@{/styles/common.css}">
+    <link rel="stylesheet" th:href="@{/styles/editArticle.css}">
+  </head>
+  <body>
+    <div id="container">
+      <h1 th:if="${article != null}">Chỉnh sửa bài viết</h1>
+      <form th:if="${article != null}" th:action="@{/article/edit/{id}(id=${article.articleId})}" th:object="${article}" method="POST">
+        <input type="hidden" th:field="*{articleId}" />
+        <input type="hidden" th:field="*{authorId}" />
+        <input type="hidden" th:field="*{status}" />
+        <input type="hidden" th:field="*{viewCount}" />
+        <input type="text" name="title" th:value="${article.title}" th:field="*{title}" />
+        <div class="fakeimg" style="height: 200px"></div>
+        <p>
+          <textarea name="content" th:text="${article.content}" th:field="*{content}"></textarea>
+        </p>
+        <button type="submit">Cập nhật</button>
+      </form>
+
+      <form th:action="@{/article/delete/{id}(id=${article.articleId})}" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit">Xóa bài viết</button>
+      </form>
+    </div>
+  </body>
+</html>
